@@ -1,3 +1,0 @@
--keep class org.havoc.device.DeviceSettings.* {
-  *;
-}

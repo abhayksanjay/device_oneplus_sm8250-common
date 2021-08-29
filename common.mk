@@ -23,9 +23,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 # Get non-open-source specific aspects
 $(call inherit-product, vendor/oneplus/sm8250-common/sm8250-common-vendor.mk)
 
-# Inherit packages from vendor/oneplus/addons/camera
-$(call inherit-product, vendor/oneplus/addons/camera/camera-vendor.mk)
-
 # Additional native libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/misc/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
@@ -37,15 +34,12 @@ PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-havoc
+    $(LOCAL_PATH)/overlay-superior
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
 # API Level
 PRODUCT_SHIPPING_API_LEVEL := 30
-
-# VNDK
-PRODUCT_USE_PRODUCT_VNDK_OVERRIDE := true
 
 # Partitions
 PRODUCT_BUILD_SUPER_PARTITION := false
@@ -99,7 +93,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.verified_boot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.verified_boot.xml \
     frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml \
     frameworks/native/data/etc/com.android.nfc_extras.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/com.android.nfc_extras.xml \
-    vendor/havoc/config/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml
+    vendor/superior/config/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml
 
 # A/B
 AB_OTA_POSTINSTALL_CONFIG += \
@@ -202,6 +196,7 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.4-impl \
     android.hardware.camera.provider@2.4-service_64 \
+    Snap \
     libcamera2ndk_vendor \
     vendor.qti.hardware.camera.postproc@1.0.vendor
 
@@ -219,7 +214,6 @@ PRODUCT_PACKAGES += \
     init.oem.rc \
     init.oem.sec.rc \
     init.oem_ftm.rc \
-    init.oneplus.camera.rc \
     init.oplus_chg.sh \
     init.qcom.class_core.sh \
     init.qcom.coex.sh \
@@ -246,10 +240,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/misc/component-overrides.xml:$(TARGET_COPY_OUT_VENDOR)/etc/sysconfig/component-overrides.xml \
     $(LOCAL_PATH)/configs/misc/component-overrides_qti.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/component-overrides.xml
-
-# DeviceSettings
-PRODUCT_PACKAGES += \
-    DeviceSettings
 
 # Display
 PRODUCT_PACKAGES += \
@@ -287,6 +277,10 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapper@2.0.vendor \
     vendor.qti.hardware.display.mapper@3.0.vendor \
     vendor.qti.hardware.display.mapper@4.0.vendor
+
+# Doze
+PRODUCT_PACKAGES += \
+    OnePlusDoze
 
 # DRM
 PRODUCT_PACKAGES += \
@@ -484,6 +478,7 @@ PRODUCT_PACKAGES += \
 
 # tri-state-key
 PRODUCT_PACKAGES += \
+    KeyHandler \
     tri-state-key_daemon
 
 # Update engine
