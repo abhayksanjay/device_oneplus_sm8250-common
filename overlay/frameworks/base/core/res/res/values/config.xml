@@ -1338,4 +1338,12 @@
         <item>0</item> <!-- COLOR_MODE_DEFAULT    -->
         <item>9</item> <!-- COLOR_MODE_DISPLAY_P3 -->
     </integer-array>
+
+    <!-- Default fod pressed color
+         0 = White
+         1 = Cyan
+         2 = Green
+         3 = Yellow
+    -->
+    <integer name="config_fod_pressed_color">0</integer>
 </resources>
